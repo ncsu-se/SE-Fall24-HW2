@@ -6,3 +6,4 @@
 ![Pylint Score](https://img.shields.io/badge/pylint-score--100%25-brightgreen)
 ![Pyflakes Status](https://img.shields.io/badge/pyflakes-pass-brightgreen)
 ![AutoPep8 Status](https://img.shields.io/badge/autopep8-compliant-brightgreen)
+![Code Quality](https://img.shields.io/badge/Code_Quality-A-brightgreen)
