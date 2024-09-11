@@ -1,0 +1,6 @@
+hw2_debugging.py
+    F 18:0 recombine - B
+    F 8:0 merge_sort - A
+
+2 blocks (classes, functions, methods) analyzed.
+Average complexity: A (4.0)
