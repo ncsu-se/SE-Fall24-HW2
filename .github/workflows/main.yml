@@ -20,15 +20,15 @@ jobs:
 
     - name: Check AutoPep8 Formatting
       run: |
-        autopep8 --diff --aggressive --aggressive hw2/*.py
+        autopep8 --diff --aggressive --aggressive hw2_debugging.py
       continue-on-error: true
 
     - name: Run Pyflakes
       run: |
-        pyflakes hw2/*.py
+        pyflakes hw2_debugging.py
       continue-on-error: true
 
     - name: Run Pylint
       run: |
-        pylint hw2/*.py
+        pylint hw2_debugging.py
       continue-on-error: true
