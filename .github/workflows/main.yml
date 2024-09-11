@@ -16,7 +16,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install autopep8 pyflakes pylint pytest
+        pip install autopep8 pyflakes pylint pytest radon
 
     - name: Check AutoPep8 Formatting
       run: |
@@ -31,6 +31,11 @@ jobs:
     - name: Run Pylint
       run: |
         pylint hw2_debugging.py
+      continue-on-error: true
+
+    - name: Run Radon
+      run: |
+        radon cc hw2_debugging.py -a
       continue-on-error: true
 
     - name: Run Tests
