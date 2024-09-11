@@ -1,4 +1,5 @@
-import pytest
+"""Test cases for the merge_sort function from hw2_debugging module."""
+
 from hw2_debugging import merge_sort
 
 def test_sorted():
