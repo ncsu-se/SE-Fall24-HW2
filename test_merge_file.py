@@ -7,3 +7,10 @@ def test_sorted():
     sorted_array = [1, 2, 3, 4, 5, 6]
     res = merge_sort(sorted_array)
     assert res == sorted_array, f"Expected [1, 2, 3, 4, 5, 6] but got {res}"
+
+def test_sorted2():
+    """Sorts an array"""
+    array = [3, 1, 6, 5, 4, 2]
+    sorted_array = [1, 2, 3, 4, 5, 6]
+    res = merge_sort(array)
+    assert res == sorted_array, f"Expected [1, 2, 3, 4, 5, 6] but got {res}"
