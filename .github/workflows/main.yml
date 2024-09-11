@@ -16,7 +16,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install autopep8 pyflakes pylint
+        pip install autopep8 pyflakes pylint pytest
 
     - name: Check AutoPep8 Formatting
       run: |
@@ -32,3 +32,7 @@ jobs:
       run: |
         pylint hw2_debugging.py
       continue-on-error: true
+
+    - name: Run Tests
+      run: |
+        pytest
