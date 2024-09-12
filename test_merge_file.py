@@ -14,3 +14,10 @@ def test_sorted2():
     sorted_array = [1, 2, 3, 4, 5, 6]
     res = merge_sort(array)
     assert res == sorted_array, f"Expected [1, 2, 3, 4, 5, 6] but got {res}"
+
+def test_duplicates():
+    """Test arrays with duplicate elements"""
+    array = [3, 1, 2, 3, 2, 1]
+    sorted_array = [1, 1, 2, 2, 3, 3]
+    res = merge_sort(array)
+    assert res == sorted_array, f"Expected [1, 1, 2, 2, 3, 3] but got {res}"
