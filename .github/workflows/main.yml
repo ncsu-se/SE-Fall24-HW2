@@ -84,7 +84,7 @@ jobs:
 
     # Upload the JSON files as artifacts
     - name: Upload badge artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: badge-json-files
         path: |
@@ -92,3 +92,7 @@ jobs:
           pyflakes_badge.json
           autopep8_badge.json
           radon_badge.json
+
+    - name: Run Tests
+      run: |
+        pytest
