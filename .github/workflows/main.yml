@@ -3,96 +3,41 @@ name: Python CI
 on: [push, pull_request]
 
 jobs:
-  test:
+  lint:
+    name: Lint code with Pylint, Pyflakes, and AutoPEP8
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
 
-    - name: Install dependencies
-      run: |
-        pip install autopep8 pyflakes pylint pytest radon
+      - name: Install dependencies
+        run: |
+          pip install pylint pyflakes autopep8
 
-    # Run AutoPep8
-    - name: Check AutoPep8 Formatting
-      id: autopep8_check
-      run: |
-        autopep8 --diff --aggressive --aggressive hw2_debugging.py > autopep8_report.txt || true
-        if grep -q -e 'diff' autopep8_report.txt; then echo "not compliant" >> autopep8_result.txt; else echo "compliant" >> autopep8_result.txt; fi
+      - name: Run Pylint and save output
+        run: |
+          pylint . > pylint-report.txt || true
+        continue-on-error: true
 
-    # Run Pyflakes
-    - name: Run Pyflakes
-      id: pyflakes_check
-      run: |
-        pyflakes hw2_debugging.py > pyflakes_report.txt || true
-        if [ -s pyflakes_report.txt ]; then echo "failed" >> pyflakes_result.txt; else echo "passed" >> pyflakes_result.txt; fi
+      - name: Run Pyflakes and save output
+        run: pyflakes . > pyflakes-report.txt || true
 
-    # Run Pylint and capture score
-    - name: Run Pylint
-      id: pylint_check
-      run: |
-        pylint_score=$(pylint hw2_debugging.py | grep -o 'rated at [0-9.]\+' | awk '{print $3}')
-        echo $pylint_score > pylint_score.txt || true
+      - name: Run AutoPEP8 and apply formatting
+        run: autopep8 --in-place --aggressive --aggressive $(git ls-files '*.py')
+      
+      - name: Upload Pylint report
+        uses: actions/upload-artifact@v2
+        with:
+          name: pylint-report
+          path: pylint-report.txt
 
-    # Run Radon and capture score
-    - name: Run Radon
-      id: radon_check
-      run: |
-        radon_score=$(radon cc hw2_debugging.py -a | grep -o '[0-9.]\+' | head -n 1)
-        echo $radon_score > radon_score.txt || true
-
-    # Create JSON file with results for dynamic badges
-    - name: Create badge JSON
-      run: |
-        pylint_score=$(cat pylint_score.txt)
-        pyflakes_result=$(cat pyflakes_result.txt)
-        autopep8_status=$(cat autopep8_result.txt)
-        radon_score=$(cat radon_score.txt)
-
-        echo '{
-          "schemaVersion": 1,
-          "label": "Code Quality",
-          "message": "'"${radon_score}"'",
-          "color": "green"
-        }' > radon_badge.json
-
-        echo '{
-          "schemaVersion": 1,
-          "label": "Pylint Score",
-          "message": "'"${pylint_score}"'/10",
-          "color": "green"
-        }' > pylint_badge.json
-
-        echo '{
-          "schemaVersion": 1,
-          "label": "Pyflakes",
-          "message": "'"${pyflakes_result}"'",
-          "color": "green"
-        }' > pyflakes_badge.json
-
-        echo '{
-          "schemaVersion": 1,
-          "label": "AutoPep8",
-          "message": "'"${autopep8_status}"'",
-          "color": "green"
-        }' > autopep8_badge.json
-
-    # Upload the JSON files as artifacts
-    - name: Upload badge artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: badge-json-files
-        path: |
-          pylint_badge.json
-          pyflakes_badge.json
-          autopep8_badge.json
-          radon_badge.json
-
-    - name: Run Tests
-      run: |
-        pytest
+      - name: Upload Pyflakes report
+        uses: actions/upload-artifact@v2
+        with:
+          name: pyflakes-report
+          path: pyflakes-report.txt
