@@ -8,17 +8,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
           python-version: '3.x'
 
       - name: Install dependencies
         run: |
           pip install pylint pyflakes autopep8
-
+      
       - name: Run Pylint and save output
         run: |
           pylint . > pylint-report.txt || true
@@ -31,13 +31,13 @@ jobs:
         run: autopep8 --in-place --aggressive --aggressive $(git ls-files '*.py')
       
       - name: Upload Pylint report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: pylint-report
           path: pylint-report.txt
 
       - name: Upload Pyflakes report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: pyflakes-report
           path: pyflakes-report.txt
