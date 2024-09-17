@@ -17,7 +17,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install pylint pyflakes autopep8
+          pip install pylint pyflakes autopep8 radon
       
       - name: Run Pylint and save output
         run: |
