@@ -29,6 +29,10 @@ jobs:
 
       - name: Run AutoPEP8 and apply formatting
         run: autopep8 --in-place --aggressive --aggressive $(git ls-files '*.py')
+
+      - name: Run Radon
+        run: |
+          radon cc hw2_debugging.py -a
       
       - name: Upload Pylint report
         uses: actions/upload-artifact@v3
