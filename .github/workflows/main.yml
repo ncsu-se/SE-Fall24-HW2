@@ -74,7 +74,7 @@ jobs:
             "label": "pylint",
             "message": "'$pylint_score'/10",
             "color": "'$color'"
-          }' > post_traces/pylint.json
+          }' > badges/pylint.json
 
 
       # Pyflakes type checking and badge update
@@ -95,7 +95,7 @@ jobs:
             "label": "pyflakes",
             "message": "'$pyflakes_errors' errors",
             "color": "'$color'"
-          }' > post_traces/pyflakes.json
+          }' > badges/pyflakes.json
 
 
       # Commit updated badges back to the repo
