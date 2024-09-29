@@ -23,31 +23,27 @@ jobs:
         id: pytest
         run: |
           pip install pytest pytest-cov
-          pytest test_merge_file.py --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
-      
-      - name: Run Pylint and save output
+          pytest test_merge_file.py --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=
+
+      - name: Check AutoPep8 Formatting
         run: |
-          pylint . > pylint-report.txt || true
+          autopep8 --diff --aggressive --aggressive hw2_debugging.py
         continue-on-error: true
-
-      - name: Run Pyflakes and save output
-        run: pyflakes . > pyflakes-report.txt || true
-
-      - name: Run AutoPEP8 and apply formatting
-        run: autopep8 --in-place --aggressive --aggressive $(git ls-files '*.py')
-
-      - name: Run Radon
+  
+      - name: Update Autopep8 Badge
         run: |
-          radon cc hw2_debugging.py -a
-      
-      - name: Upload Pylint report
-        uses: actions/upload-artifact@v3
-        with:
-          name: pylint-report
-          path: pylint-report.txt
-
-      - name: Upload Pyflakes report
-        uses: actions/upload-artifact@v3
-        with:
-          name: pyflakes-report
-          path: pyflakes-report.txt
+          diff=$(git diff)
+          formatted="true"
+          if [[ ! -z "$diff" ]]; then
+            formatted="false"
+          fi
+          color="green"
+          if [[ "$formatted" == "false" ]]; then
+            color="red"
+          fi
+          echo '{
+            "schemaVersion": 1,
+            "label": "autopep8",
+            "message": "formatted",
+            "color": "'$color'"
+          }' > badges/autopep8.json
