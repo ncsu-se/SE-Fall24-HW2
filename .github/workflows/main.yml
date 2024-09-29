@@ -71,3 +71,24 @@ jobs:
             "message": "'$pylint_score'/10",
             "color": "'$color'"
           }' > badges/pylint.json
+
+
+      # Pyflakes type checking and badge update
+      - name: Run Pyflakes
+        run: |
+          pyflakes hw2_debugging.py || true
+        continue-on-error: true
+      
+      - name: Update Pyflakes Badge
+        run: |
+          pyflakes_errors=$(pyflakes hw2_debugging.py | wc -l)
+          color="green"
+          if [[ "$pyflakes_errors" -gt 0 ]]; then
+            color="red"
+          fi
+          echo '{
+            "schemaVersion": 1,
+            "label": "pyflakes",
+            "message": "'$pyflakes_errors' errors",
+            "color": "'$color'"
+          }' > badges/pyflakes.json
