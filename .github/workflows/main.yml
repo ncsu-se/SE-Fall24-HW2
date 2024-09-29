@@ -46,7 +46,7 @@ jobs:
             "label": "autopep8",
             "message": "formatted",
             "color": "'$color'"
-          }' > badges/autopep8.json
+          }' > post_traces/autopep8.json
 
 
       # Pylint check and badge update
@@ -70,7 +70,7 @@ jobs:
             "label": "pylint",
             "message": "'$pylint_score'/10",
             "color": "'$color'"
-          }' > badges/pylint.json
+          }' > post_traces/pylint.json
 
 
       # Pyflakes type checking and badge update
@@ -91,7 +91,7 @@ jobs:
             "label": "pyflakes",
             "message": "'$pyflakes_errors' errors",
             "color": "'$color'"
-          }' > badges/pyflakes.json
+          }' > post_traces/pyflakes.json
 
 
       # Commit updated badges back to the repo
