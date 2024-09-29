@@ -92,3 +92,13 @@ jobs:
             "message": "'$pyflakes_errors' errors",
             "color": "'$color'"
           }' > badges/pyflakes.json
+
+
+      # Commit updated badges back to the repo
+      - name: Commit badge updates
+        run: |
+          git config --local user.email "jayjoshi1400@gmail.com"
+          git config --local user.name "jayjoshi1400"
+          git add post_traces/*.json
+          git commit -m "Update badges"
+          git push origin HEAD:main
