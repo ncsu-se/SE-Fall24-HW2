@@ -19,6 +19,10 @@ jobs:
         run: |
           pip install pylint pyflakes autopep8 radon
 
+      - name: Set up GitHub token
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/${{ github.repository }}
+
       - name: Test with pytest
         id: pytest
         run: |
