@@ -1,7 +1,7 @@
 name: Python CI
 
 on: [push, pull_request]
-
+ 
 jobs:
   lint:
     name: Lint code with Pylint, Pyflakes, and AutoPEP8
