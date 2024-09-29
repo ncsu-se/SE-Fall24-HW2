@@ -4,7 +4,7 @@
 
 ## Status Badges
 
-[![Python CI](https://github.com/ncsu-se/SE-Fall24-HW2/actions/workflows/main.yml/badge.svg)](https://github.com/ncsu-se/SE-Fall24-HW2/actions)
+[![Python Tests](https://github.com/ncsu-se/SE-Fall24-HW2/actions/workflows/main.yml/badge.svg)](https://github.com/ncsu-se/SE-Fall24-HW2/actions)
 [![Pylint Score](https://img.shields.io/badge/pylint-score--100%25-brightgreen)](https://github.com/ncsu-se/SE-Fall24-HW2/actions/workflows/main.yml)
 [![Pyflakes Status](https://img.shields.io/badge/pyflakes-pass-brightgreen)](https://github.com/ncsu-se/SE-Fall24-HW2/actions/workflows/main.yml)
 [![AutoPep8 Status](https://img.shields.io/badge/autopep8-compliant-brightgreen)](https://github.com/ncsu-se/SE-Fall24-HW2/actions/workflows/main.yml)
