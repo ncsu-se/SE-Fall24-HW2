@@ -97,8 +97,8 @@ jobs:
       # Commit updated badges back to the repo
       - name: Commit badge updates
         run: |
-          git config --local user.email "jayjoshi1400@gmail.com"
-          git config --local user.name "jayjoshi1400"
+          git config --local user.email "pdinesh.ms7@gmail.com"
+          git config --local user.name "dinesh-pasupuleti"
           git add post_traces/*.json
           git commit -m "Update badges"
           git push origin HEAD:main
