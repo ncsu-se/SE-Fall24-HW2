@@ -31,9 +31,9 @@ jobs:
 
       - name: Check AutoPep8 Formatting
         run: |
-          autopep8 --diff --aggressive --aggressive hw2_debugging.py
+         autopep8 --diff --aggressive --aggressive hw2_debugging.py
         continue-on-error: true
-  
+
       - name: Update Autopep8 Badge
         run: |
           diff=$(git diff)
@@ -50,7 +50,7 @@ jobs:
             "label": "autopep8",
             "message": "formatted",
             "color": "'$color'"
-          }' > post_traces/autopep8.json
+          }' > badges/autopep8.json
 
 
       # Pylint check and badge update
